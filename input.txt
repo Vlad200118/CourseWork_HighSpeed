@@ -1,0 +1,23 @@
+******MESH******
+length			1
+NX				201
+BoundaryConditinsFile	bound.bc
+******SOLVER_SETTINGS******
+TimeEnd			0.012
+CFL				0.01
+FluxScheme		2
+TVDScheme		4
+******GAS_MODEL******
+gamma			1.4
+Cp				1005
+molMass			0.02898
+******INITIAL_FIELD******
+diaphragmPosition 0.5
+pressureLeft	1000
+densityLeft		1.0
+velocityLeft	0
+pressureRight	0.01
+densityRight	1.0
+velocityright	0
+******RESULT_FILE******
+resultFileName F:\\HighSpeed\\Program\\TEMP\\AUSM+.plt

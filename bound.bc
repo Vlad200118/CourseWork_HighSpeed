@@ -1,0 +1,13 @@
+left 3
+right 3
+*****Discription*****
+Side	Type	parameters
+Side: left or right
+Types and parameters
+0 - wall : u - wall's velocity
+1 - open : p, T - backFlow parameters
+2 - plunger : f, A - frequancy, amplitude
+3 - symmetry
+
+For example:
+left 1 100000.0 290.46	- open (type=1) with p=100000.0 Pa and T=290.46K on left(side=left) boundary
