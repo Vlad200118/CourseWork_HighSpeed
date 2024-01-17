@@ -8,6 +8,7 @@ private:
 	std::vector <double> cellCenter;
 	std::vector <double> surface;
 	std::vector <double> cellVolume;
+	std::vector <double> oldCellVolume;
 
 	std::vector <double> oldPosFace;
 	std::vector <double> newPosFace;
@@ -28,12 +29,14 @@ public:
 		surface.resize(NX+1);
 		velocityFace.resize(NX + 1);
 		cellVolume.resize(NX+2);
+		oldCellVolume.resize(NX + 2);
 
 		leftBoundCoord = 0.0;
 		rightBoundCoord = length;
 		CalculateCoordinates();
 		CalculateSquare();
 		CalculateVolume();
+		std::copy(cellVolume.begin(), cellVolume.end(), oldCellVolume.begin());
 		CalculateVelocityFace();
 
 	}
@@ -57,6 +60,10 @@ public:
 	double CellVolume(int index) const
 	{
 		return cellVolume[index];
+	}
+	double OldCellVolume(int index) const
+	{
+		return oldCellVolume[index];
 	}
 	double Node(int index) const
 	{
@@ -184,6 +191,7 @@ private:
 
 	void CalculateVolume()
 	{
+		std::copy(cellVolume.begin(), cellVolume.end(), oldCellVolume.begin());
 		for (size_t i = 1; i < cellVolume.size()-1; i++)
 		{
 			cellVolume[i] = abs(newPosFace[i] - newPosFace[i-1]) * (surface[i] + surface[i - 1]) * 0.5;

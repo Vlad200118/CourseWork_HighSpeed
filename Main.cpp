@@ -134,14 +134,14 @@ int main()
 			freeFlux.rho_U2_plus_p = w[i].convertToNaturalVar(gas).p;
 			freeFlux.rho_U_H = 0.0;
 			
-			wNext[i] = w[i] - (flux[i]*mesh.S(i) - flux[i - 1]*mesh.S(i-1) - freeFlux*(mesh.S(i)- mesh.S(i-1))) 
+			wNext[i] = w[i] * (mesh.OldCellVolume(i) / mesh.CellVolume(i)) - (flux[i]*mesh.S(i) - flux[i - 1]*mesh.S(i-1) - freeFlux*(mesh.S(i)- mesh.S(i-1)))
 				* (deltaTime / mesh.CellVolume(i));
 			
 		}
 
 		boundCond.Evaluate(wNext, time);
 
-		if (iTime % 100 == 0)
+		if (iTime % 10 == 0)
 			monPoints.UpdateMonitors(time, wNext, gas);
 
 		std::copy(wNext.begin(), wNext.end(), w.begin());
